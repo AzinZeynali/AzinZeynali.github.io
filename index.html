@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Azin Zeynali | M.Sc. in AI &amp; Robotics</title>
+<meta name="description" content="Portfolio of Azin Zeynali: machine learning, NLP, and IoT security projects.">
+<style>
+  :root { --bg:#0f1128; --text:#c9cbe8; --muted:#8e91bd; --head:#f1f1fb; --accent:#f0c05a; --line:#252a4d; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family: Georgia, "Noto Serif", serif; line-height:1.65; }
+  main { max-width: 860px; margin: 0 auto; padding: 72px 24px 96px; }
+  h1 { font-size: clamp(2.4rem, 7vw, 4rem); font-weight: 400; color: var(--head); margin: 0 0 6px; }
+  .role { color: var(--accent); font-size: 1.25rem; margin: 0 0 28px; }
+  p { margin: 0 0 14px; color: var(--muted); font-size: 1.1rem; }
+  h2 { font-size: 1.6rem; font-weight: 400; color: var(--head); margin: 64px 0 0; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .project { padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .project h3 { margin: 0 0 4px; font-size: 1.25rem; font-weight: 400; color: var(--head); }
+  .project h3 a { color: inherit; text-decoration: none; }
+  .project h3 a:hover { color: var(--accent); }
+  .project p { margin: 0 0 6px; font-size: 1.02rem; }
+  .meta { font-size: .9rem; color: var(--muted); }
+  .meta a { color: var(--accent); }
+  a { color: var(--accent); }
+  .skills p { margin-bottom: 8px; }
+  .skills b { color: var(--head); font-weight: 400; }
+  .contact a { margin-right: 22px; }
+  .note { font-size: .95rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Azin Zeynali</h1>
+  <p class="role">M.Sc. in Artificial Intelligence &amp; Robotics</p>
+  <p>M.Sc. graduate in AI &amp; Robotics (2026) with hands-on projects in machine learning, NLP, and IoT security. Interested in working on real-world projects and learning by building.</p>
+  <p>Birjand, Iran (open to remote or relocation to Mashhad or Tehran).</p>
+
+  <h2>Projects</h2>
+  <div id="projects"><p class="note">Loading projects…</p></div>
+
+  <h2>Skills</h2>
+  <div class="skills">
+    <p><b>Core:</b> Python</p>
+    <p><b>Applied:</b> Machine Learning · Deep Learning · Natural Language Processing · Internet of Things Security</p>
+    <p><b>Familiar:</b> C# · Unity · Git/GitHub · Hugging Face Spaces</p>
+  </div>
+
+  <h2>Contact</h2>
+  <p class="contact">
+    <a href="mailto:azinzeynali14@gmail.com">azinzeynali14@gmail.com</a>
+    <a href="https://github.com/AzinZeynali">GitHub</a>
+    <a href="https://www.linkedin.com/in/azin-zeynali-456b7b439/">LinkedIn</a>
+    <a href="https://huggingface.co/AzinZeynali">Hugging Face</a>
+  </p>
+</main>
+
+<script>
+  var USER = "AzinZeynali";
+  var TOPIC = "portfolio";   // add this topic to any repo to show it here
+
+  // Shown only if GitHub can't be reached
+  var FALLBACK = [
+    { name: "astro-assistant", description: "Browser-based astronomy assistant: semantic search over Wikipedia articles + Random Forest exoplanet classifier trained on NASA Kepler data.", language: "JavaScript", html_url: "https://github.com/AzinZeynali/astro-assistant", homepage: "https://huggingface.co/spaces/AzinZeynali/astro-assistant" },
+    { name: "rag-web", description: "Full-stack document Q&A app using RAG (Flask backend + HTML/JS frontend) with local embeddings.", language: "Python", html_url: "https://github.com/AzinZeynali/rag-web", homepage: "" },
+    { name: "kepler-exoplanet-classifier", description: "Decision Tree classifier for Kepler exoplanet candidates, with accuracy evaluation and a confusion matrix.", language: "Python", html_url: "https://github.com/AzinZeynali/kepler-exoplanet-classifier", homepage: "" },
+    { name: "idle-clicker-game", description: "Idle clicker game built in Unity with C#.", language: "C#", html_url: "https://github.com/AzinZeynali/idle-clicker-game", homepage: "" }
+  ];
+
+  function pretty(name) {
+    return name.replace(/[-_]+/g, " ").replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+  }
+
+  function render(repos) {
+    var box = document.getElementById("projects");
+    box.textContent = "";
+    repos.forEach(function (r) {
+      var d = document.createElement("div"); d.className = "project";
+
+      var h = document.createElement("h3");
+      var a = document.createElement("a"); a.href = r.html_url; a.textContent = pretty(r.name);
+      h.appendChild(a); d.appendChild(h);
+
+      var p = document.createElement("p"); p.textContent = r.description || ""; d.appendChild(p);
+
+      var m = document.createElement("div"); m.className = "meta";
+      m.appendChild(document.createTextNode(r.language ? r.language + " · " : ""));
+      var code = document.createElement("a"); code.href = r.html_url; code.textContent = "Code";
+      m.appendChild(code);
+      if (r.homepage && /^https?:\/\//.test(r.homepage)) {
+        m.appendChild(document.createTextNode(" · "));
+        var demo = document.createElement("a"); demo.href = r.homepage; demo.textContent = "Live demo";
+        m.appendChild(demo);
+      }
+      d.appendChild(m);
+      box.appendChild(d);
+    });
+  }
+
+  fetch("https://api.github.com/users/" + USER + "/repos?per_page=100&sort=pushed")
+    .then(function (res) { if (!res.ok) throw new Error(res.status); return res.json(); })
+    .then(function (all) {
+      var list = all.filter(function (r) { return !r.fork && (r.topics || []).indexOf(TOPIC) !== -1; });
+      if (!list.length) throw new Error("no tagged repos");
+      list.sort(function (x, y) { return new Date(y.pushed_at) - new Date(x.pushed_at); });
+      render(list);
+    })
+    .catch(function () { render(FALLBACK); });
+</script>
+</body>
+</html>
